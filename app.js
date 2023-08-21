@@ -7,49 +7,36 @@ const answers = [
 ];
 const correct = 'Nintendo DS';
 
-// 定数の文字列をHTMLに反映させる
-document.getElementById('js-question').textContent = question;
-
 const $button = document.getElementsByTagName('button');
+const buttonLength = $button.length;
+// クイズの問題文、選択肢を定義
+const setupQuiz = () => {
+    document.getElementById('js-question').textContent = question;
+    let buttonIndex = 0;
+    while(buttonIndex < buttonLength) {
+        $button[buttonIndex].textContent = answers[buttonIndex];
+        buttonIndex++;
+    }
+}
+setupQuiz();
 
-$button[0].textContent = answers[0];
-$button[1].textContent = answers[1];
-$button[2].textContent = answers[2];
-$button[3].textContent = answers[3];
-
+const clickHandler = (e) => {
+    if(correct === e.target.textContent){
+        window.alert('correct!!');
+    } else {
+        window.alert('incorrect...')
+    }
+};
 
 // ボタンをクリックしたら正誤判定
-$button[0].addEventListener('click', () => {
-    if(correct === 　$button[0].textContent){
-        window.alert('correct!!');
-    } else {
-        window.alert('incorrect...')
-    }
-});
-
-$button[1].addEventListener('click', () => {
-    if(correct === 　$button[1].textContent){
-        window.alert('correct!!');
-    } else {
-        window.alert('incorrect...')
-    }
-});
-
-$button[2].addEventListener('click', () => {
-    if(correct === 　$button[2].textContent){
-        window.alert('correct!!');
-    } else {
-        window.alert('incorrect...')
-    }
-});
-
-$button[3].addEventListener('click', () => {
-    if(correct === 　$button[3].textContent){
-        window.alert('correct!!');
-    } else {
-        window.alert('incorrect...')
-    }
-});
+let handleIndex = 0;
+while (handleIndex < buttonLength) {
+    $button[handleIndex].addEventListener('click', (e) => {
+        clickHandler(e);
+    });
+    handleIndex++;
+}
 
 //メモ
 // HTMLオブジェクトが入っている変数、定数の場合は先頭に$をつけることが慣習となっている
+// プログラミングをする上でコードに柔軟性を持たせることが大切
